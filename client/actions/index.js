@@ -24,9 +24,9 @@ export const showError = (errorMessage) => {
   }
 }
 
-export function fetchPosts (subreddit) {
+export function fetchPosts(subreddit) {
   return (dispatch) => {
-    dispatch(requestPosts())
+    dispatch(requestPosts()) // tells the waiting spinner to be true
     return request
       .get(`/api/v1/reddit/subreddit/${subreddit}`)
       .then(res => {
