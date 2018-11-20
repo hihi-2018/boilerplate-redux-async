@@ -14,9 +14,15 @@ class LoadSubreddit extends React.Component {
 
   render() {
     return (
-      <button onClick={() => this.props.dispatch(fetchPosts(this.state.subreddit))}>
-        Fetch Posts
+      <React.Fragment>
+        <input type='text' onChange={(e) => { this.setState({ subreddit: e.target.value }) }} value={this.state.subreddit} id="subreddit-input"></input>
+
+
+
+        <button onClick={() => this.props.dispatch(fetchPosts(this.state.subreddit))}>
+          Fetch Posts
     </button>
+      </React.Fragment>
     )
 
   }
