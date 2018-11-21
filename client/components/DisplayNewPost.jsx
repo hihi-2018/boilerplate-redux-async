@@ -1,11 +1,11 @@
 import React from 'react'
 
-const Post = (props) => (
+const DisplayNewPost = (props) => (
   <React.Fragment>
     <div>{props.title}</div>
-    <p>{props.date}</p>
-    <p>{props.summary} </p>
+    <p>{props.body}</p>
+
   </React.Fragment>
 )
 
-export default Post
+export default DisplayNewPost

@@ -1,16 +1,16 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import Post from './Post'
+import DisplayNewPost from './DisplayNewPost'
 
-const Subreddit = ({ subreddits }) => (
+const NewPostList = ({ newPosts }) => (
   <div>
-    {subreddits.map((post, i) =>
-      <Post
+    {newPosts.map((post, i) =>
+      <DisplayNewPost
         key={i}
         title={post.title}
-        date={post.created_utc}
-        summary={post.selftext}
+        body={post.body}
+
 
       />
     )}
@@ -19,10 +19,10 @@ const Subreddit = ({ subreddits }) => (
 
 const mapStateToProps = (state) => {
   return {
-    subreddits: state.subreddits
+    newPosts: state.newPosts
   }
 }
 
 export default connect(
   mapStateToProps
-)(Subreddit)
+)(NewPostList)
