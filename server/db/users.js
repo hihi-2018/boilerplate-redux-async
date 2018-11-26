@@ -1,6 +1,6 @@
 const conn = require('./connection')
 
-
+const hash = require('../auth/hash')
 // userExists(username:string):Promise<boolean>
 function userExists(username, db = conn) {  // use conn unless test framework passes an different connection
   // console.log("Users db userExists check")
@@ -15,8 +15,7 @@ function userExists(username, db = conn) {  // use conn unless test framework pa
 
 // createUser(newUser:{username:string, password:string}):Promise
 function createUser(username, password, db = conn) {
-  console.log("db users insert sql: ", db('users')
-    .insert({ username: username, hash: password }).toString())
+  // console.log("db users insert sql: ", db('users').insert({ username: username, hash: password }).toString())
   return db('users')
     .insert({ username: username, hash: password })
     .then(result => {
