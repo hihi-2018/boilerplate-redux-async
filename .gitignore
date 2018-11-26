@@ -6,3 +6,5 @@ bundle*
 *.sqlite3
 
 *.lock
+
+.env

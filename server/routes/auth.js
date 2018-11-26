@@ -22,14 +22,21 @@ function register(req, res) {
   // check if username available
   usersDb.userExists(username)
     .then(exists => {
-      if(!exists) {
+      if (!exists) {
         usersDb
           .createUser(username, password)
-          .then(result => {
-            console.log("auth route register, create user result", result)
-            res
-              .status('201') // TODO return newly created user?
-              .end()
+          .then(new_user_id => {
+            console.log("auth route register, create user result> id: ", new_user_id)
+            // get the newly created user from the db to return it
+            usersDb.getUser(new_user_id)
+              .then(new_user => {
+                res
+                  .status('201') // TODO return newly created user?
+                  .send({
+                    message: "successfully created user, id=" + new_user_id,
+                    user: new_user
+                  })
+              })
           })
           .catch(err => {
             res.status(400).json({ message: "problem: " + err })
@@ -42,7 +49,7 @@ function register(req, res) {
       }
     })
     .catch(err => {
-      res.status(500).send({ message: err.message })
+      res.status(500).send({ error_message: err.message })
     })
 }
 

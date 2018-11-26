@@ -13,6 +13,19 @@ function userExists(username, db = conn) { // use conn unless test framework pas
     })
 }
 
+function getUser(id, db = conn) {
+  console.log("Server DB users getUser SQL: ", db('users').select().where('id', id).toString())
+  return db('users')
+    .select()
+    .where('id', id)
+    .then(
+      user => {
+        console.log("server db users getUser id, user/result >>>>  ", id, user)
+        return user
+      }
+    )
+}
+
 // createUser(newUser:{username:string, password:string}):Promise
 function createUser(username, password, db = conn) {
   // console.log("db users insert sql: ", db('users').insert({ username: username, hash: password }).toString())
@@ -22,10 +35,12 @@ function createUser(username, password, db = conn) {
     .insert({ username: username, hash: hashedPassword })
     .then(result => {
       console.log("users db insert user result: ", result)
+      return result
     })
 }
 
 module.exports = {
   userExists,
-  createUser
+  createUser,
+  getUser
 }
