@@ -1,2 +1,8 @@
 node_modules
 bundle*
+
+.vscode
+
+*.sqlite3
+
+*.lock
