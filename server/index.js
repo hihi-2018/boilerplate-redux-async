@@ -1,4 +1,5 @@
 const server = require('./server')
+require('dotenv').config() // enables .env variables
 
 const port = process.env.PORT || 3000
 
