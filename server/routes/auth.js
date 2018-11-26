@@ -12,6 +12,12 @@ router.use(express.json())
 
 router.post('/register', register, token.issue)  // token.issue is a function
 
+router.get('/username', token.decode, (req, res) => {
+  res.json({
+    username: req.user.username
+  })
+})
+
 function register(req, res, next) {
   console.log("Auth route register body: ", req.body)
   // handle registration
@@ -53,5 +59,7 @@ function register(req, res, next) {
       res.status(500).send({ error_message: err.message })
     })
 }
+
+
 
 module.exports = router
