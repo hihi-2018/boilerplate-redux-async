@@ -22,23 +22,25 @@ function register(req, res) {
   // check if username available
   usersDb.userExists(username)
     .then(exists => {
-      if (!exists) {
+      if(!exists) {
         usersDb
           .createUser(username, password)
           .then(result => {
             console.log("auth route register, create user result", result)
             res
-              .status('201')
+              .status('201') // TODO return newly created user?
               .end()
-          }
-          )
-      } else {
+          })
+          .catch(err => {
+            res.status(400).json({ message: "problem: " + err })
+          })
+      }
+      else {
         res
           .status('400')
           .send({ message: 'Username already taken' })
       }
-    }
-    )
+    })
     .catch(err => {
       res.status(500).send({ message: err.message })
     })

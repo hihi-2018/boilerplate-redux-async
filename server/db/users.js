@@ -1,8 +1,8 @@
 const conn = require('./connection')
 
-const hash = require('../auth/hash')
+const hashGenerate = require('../auth/hash')
 // userExists(username:string):Promise<boolean>
-function userExists(username, db = conn) {  // use conn unless test framework passes an different connection
+function userExists(username, db = conn) { // use conn unless test framework passes an different connection
   // console.log("Users db userExists check")
   return db('users')
     .count('id as n')
@@ -16,8 +16,10 @@ function userExists(username, db = conn) {  // use conn unless test framework pa
 // createUser(newUser:{username:string, password:string}):Promise
 function createUser(username, password, db = conn) {
   // console.log("db users insert sql: ", db('users').insert({ username: username, hash: password }).toString())
+  const hashedPassword = hashGenerate(password)
+  console.log("Users route, createUser: password, hashedPassword: ", password, hashedPassword)
   return db('users')
-    .insert({ username: username, hash: password })
+    .insert({ username: username, hash: hashedPassword })
     .then(result => {
       console.log("users db insert user result: ", result)
     })
@@ -27,5 +29,3 @@ module.exports = {
   userExists,
   createUser
 }
-
-
