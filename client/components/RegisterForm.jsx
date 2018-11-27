@@ -58,6 +58,7 @@ class RegisterForm extends React.Component {
     render() {
         return(
             <div className="form-wrapper register">
+            <p>User info: {this.props.auth.isAuthenticated.toString()}</p> 
             <form name="register-form" onSubmit={this.handleSubmit} className="register">
                 <fieldset>
                     <legend>Create a username and password</legend>
@@ -75,8 +76,9 @@ class RegisterForm extends React.Component {
 
 
 
-// mapStateToProps (state) {
-// }
+const mapStateToProps = (state) => {
+    return state
+}
 
 const mapDispatchToProps = (dispatch) => {
     return {
@@ -89,4 +91,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(RegisterForm)
+export default connect(mapStateToProps, mapDispatchToProps)(RegisterForm)

@@ -39,6 +39,7 @@ export function registerUser(creds) {
                 // check response
                 if(response.ok) {
                     const userInfo = saveUserToken(response.body.token)
+                    console.log("register action registerUser, response.ok & userInfo in saved token is: ", userInfo)
                     dispatch(receiveLogin(userInfo))
                 }
                 else {

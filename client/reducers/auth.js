@@ -28,6 +28,7 @@ function auth(state = initialState, action) {
     }
 
     if(action.type == LOGIN_SUCCESS) {
+        console.log("auth reducer LOGIN_SUCCESS setting user: action.user ", action.user)
         return {
             ...state,
             isFetching: false,
