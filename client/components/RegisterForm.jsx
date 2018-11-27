@@ -29,6 +29,7 @@ class RegisterForm extends React.Component {
     }
 
     handleSubmit = (e) => {
+        e.preventDefault()
         // get state, dispatch it to the reducers with thunk action to submit
         console.log("RegisterForm handleSubmit state: ", this.state)
         const { username, password, confirm } = this.state

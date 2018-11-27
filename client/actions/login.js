@@ -8,6 +8,7 @@ export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 
 
 export const receiveLogin = (userInfo) => {
+    console.log("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX USER INFO", userInfo)
     return {
         type: LOGIN_SUCCESS,
         isFetching: false,

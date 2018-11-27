@@ -1,5 +1,5 @@
 import request from 'superagent'
-import { saveUserToken } from '../utils/auth'
+import { saveUserToken, getUserTokenInfo} from '../utils/auth'
 import { receiveLogin } from './login'
 export const REQUEST_REGISTER = 'REQUEST_REGISTER'
 export const REGISTER_ERROR = 'REGISTER_ERROR'
@@ -39,7 +39,8 @@ export function registerUser(creds) {
                 // check response
                 if(response.ok) {
                     const userInfo = saveUserToken(response.body.token)
-                    console.log("register action registerUser, response.ok & userInfo in saved token is: ", userInfo)
+                    const gotUserToken = getUserTokenInfo() 
+                    console.log("register action registerUser, response.ok & userInfo in saved token is: ", gotUserToken || 'NO TOKEN SAVED')
                     dispatch(receiveLogin(userInfo))
                 }
                 else {
