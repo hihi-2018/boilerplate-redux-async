@@ -10,7 +10,10 @@ const token = require('../auth/token')
 
 router.use(express.json())
 
-router.post('/register', register, token.issue)  // token.issue is a function
+
+// ROUTES API
+
+router.post('/register', register, token.issue) // token.issue is a function
 
 router.get('/username', token.decode, (req, res) => {
   res.json({
@@ -30,7 +33,7 @@ function register(req, res, next) {
   // check if username available
   usersDb.userExists(username)
     .then(exists => {
-      if (!exists) {
+      if(!exists) {
         usersDb
           .createUser(username, password)
           // .then(new_user_id => {
